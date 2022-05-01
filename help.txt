@@ -1,0 +1,32 @@
+
+
+# Git commands
+
+
+---- FIRST Time ---
+
+# initialize repo
+git initialize
+
+# add a remote url
+git remote add origin <url>
+
+
+# add changes
+git add .
+
+
+# git commit (local copy)
+git commit -m "ANY MESSAGE"
+
+
+# push (1st time)
+git push -u origin master
+
+
+
+--- n(th) Time ---
+
+git add .
+git commit -m  "message"
+git push
