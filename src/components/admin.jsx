@@ -4,6 +4,8 @@ import { useState } from "react";
 const Admin = () => {
   const [product, setProduct] = useState({});
   const [coupon, setCoupon] = useState({});
+  const [errorVisible, setErrorVisible] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleTextChange = (e) => {
     let copy = { ...product };
@@ -19,20 +21,25 @@ const Admin = () => {
     setCoupon(copy);
   };
 
+  const showError = (text) => {
+    setErrorMessage(text);
+    setErrorVisible(true);
+  };
+
   const handleSaveProduct = () => {
     // validations
     if (product.title.length < 5) {
-      alert("Error, Title should have at least 5 chars");
+      showError("Error, Title should have at least 5 chars");
       return;
     }
 
     if (!product.image) {
-      alert("Error, Image can not be empty");
+      showError("Error, Image can not be empty");
       return;
     }
 
     if (!product.category) {
-      alert("Error, Category can not be empty");
+      showError("Error, Category can not be empty");
       return;
     }
 
@@ -40,10 +47,11 @@ const Admin = () => {
     savedProduct.price = parseFloat(product.price);
 
     if (!savedProduct.price || savedProduct.price < 1) {
-      alert("Error, Price should be greater than $1");
+      showError("Error, Price should be greater than $1");
       return;
     }
 
+    setErrorVisible(false);
     // send product to Server
     console.log(savedProduct);
   };
@@ -57,22 +65,25 @@ const Admin = () => {
     // validations:
     // 1 discount cant not be greater than 35%
     if (!savedCoupon.discount || savedCoupon.discount > 35) {
-      alert("Error, discount can not be lower than 1 or greater than 35%");
+      showError("Error, discount can not be lower than 1 or greater than 35%");
       return;
     }
 
     // 2 code should have at least 5 chars
     if (savedCoupon.code.length < 5) {
-      alert("Error, code should contain at least 5 characters");
+      showError("Error, code should contain at least 5 characters");
       return;
     }
 
+    setErrorVisible(false);
     // send coupon to Server
     console.log("Saving coupon");
   };
 
   return (
     <div className="admin-page">
+      {errorVisible ? <div className="alert alert-danger">{errorMessage}</div> : null}
+
       <div className="sections-container">
         <section className="sec-products">
           <h4>Manage Products</h4>
