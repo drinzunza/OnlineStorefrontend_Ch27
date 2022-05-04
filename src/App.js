@@ -10,25 +10,29 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
 import About from "./components/about";
 import Admin from "./components/admin";
-
+import Cart from "./components/cart";
+import GlobalStoreProvider from "./context/globalStoreProvider";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
-        <Navbar></Navbar>
+      <GlobalStoreProvider>
+        <BrowserRouter>
+          <Navbar></Navbar>
 
-        <Routes>
-          <Route path="/home" element={<Home />}></Route>
-          <Route path="/admin" element={<Admin />}></Route>
-          <Route path="/catalog" exact element={<Catalog />}></Route>
-          <Route path="/about" exact element={<About />}></Route>
-          <Route path="/shoppingList" exact element={<Todo />}></Route>
-        </Routes>
+          <Routes>
+            <Route path="/home" element={<Home />}></Route>
+            <Route path="/admin" element={<Admin />}></Route>
+            <Route path="/catalog" exact element={<Catalog />}></Route>
+            <Route path="/about" exact element={<About />}></Route>
+            <Route path="/shoppingList" exact element={<Todo />}></Route>
+            <Route path="/cart" exact element={<Cart />}></Route>
+          </Routes>
 
-        <Footer></Footer>
-      </BrowserRouter>
+          <Footer></Footer>
+        </BrowserRouter>
+      </GlobalStoreProvider>
     </div>
   );
 }
