@@ -1,0 +1,12 @@
+.cart .cart-content {
+    display: flex;
+}
+
+.cart .products {
+    flex: 3;
+}
+
+.cart .side-panel {
+    flex: 1;
+    padding-top: 100px;
+}
